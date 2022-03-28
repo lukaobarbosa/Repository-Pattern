@@ -23,3 +23,9 @@ Route::delete('/deleteUser/{id}', [UserController::class, 'deleteUser'])->name('
 Route::get('/updatePage/{id}', [UserController::class, 'updatePage'])->name('updatePage');
 
 Route::put('/updateUser/{id}', [UserController::class, 'updateUser'])->name('updateUser');
+
+Route::post('/auth', [UserController::class, 'authPage'])->name('authPage');
+
+Route::get('/loginPage', [UserController::class, 'loginPage'])->name('loginPage');
+
+Route::get('/authContent', [UserController::class, 'authContent'])->name('authContent')->middleware('auth');

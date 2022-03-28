@@ -42,5 +42,4 @@ class AbstractRepository
     {
         return $this->model->find($id)->update($data);
     }
-
 }

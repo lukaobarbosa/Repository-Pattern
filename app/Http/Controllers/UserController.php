@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\LoginRequest;
 use App\Repositories\Contracts\RepositoriesContractsInterface;
-
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -43,4 +44,28 @@ class UserController extends Controller
 
         return redirect()->route('index');
     }
+    
+    public function loginPage()
+    {
+        return view('login');
+    }
+
+    public function authPage(LoginRequest $request)
+    {
+       $user = $request->validated();
+        
+        if (Auth::attempt($user)){
+            $request->session()->regenerate();
+
+            return redirect()->intended('/authContent');
+        }
+
+        return redirect()->route('index');
+    }
+
+    public function authContent()
+    {
+        return view ('auth');
+    }
+
 }
