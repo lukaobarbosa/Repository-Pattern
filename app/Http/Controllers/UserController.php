@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\LoginRequest;
+use App\Http\Requests\CadastroRequest;
 use App\Repositories\Contracts\RepositoriesContractsInterface;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -17,7 +18,7 @@ class UserController extends Controller
         return view ('index', compact('users'));   
     }
 
-    public function postUser(RepositoriesContractsInterface $model, Request $request)
+    public function postUser(RepositoriesContractsInterface $model, CadastroRequest $request)
     {
         $model->create($request->all());
 
@@ -50,22 +51,33 @@ class UserController extends Controller
         return view('login');
     }
 
-    public function authPage(LoginRequest $request)
+    public function authPage(RepositoriesContractsInterface $model,  LoginRequest $request)
     {
        $user = $request->validated();
         
         if (Auth::attempt($user)){
             $request->session()->regenerate();
-
+            
             return redirect()->intended('/authContent');
         }
 
         return redirect()->route('index');
     }
 
-    public function authContent()
+    public function authContent(RepositoriesContractsInterface $model)
     {
-        return view ('auth');
+        $user = Auth::user()->name;
+        return view ('authContent', compact('user'));
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('index');
     }
 
 }

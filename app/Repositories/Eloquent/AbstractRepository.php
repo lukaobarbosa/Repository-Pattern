@@ -2,7 +2,6 @@
 
 namespace App\Repositories\Eloquent;
 
-use Illuminate\Http\Request;
 
 class AbstractRepository
 {

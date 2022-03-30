@@ -26,6 +26,8 @@ Route::put('/updateUser/{id}', [UserController::class, 'updateUser'])->name('upd
 
 Route::post('/auth', [UserController::class, 'authPage'])->name('authPage');
 
+Route::get('/authContent', [UserController::class, 'authContent'])->name('authContent')->middleware('auth');
+
 Route::get('/loginPage', [UserController::class, 'loginPage'])->name('loginPage');
 
-Route::get('/authContent', [UserController::class, 'authContent'])->name('authContent')->middleware('auth');
+Route::get('/logout', [UserController::class, 'logout'])->name('logout');
