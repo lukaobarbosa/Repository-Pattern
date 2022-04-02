@@ -8,6 +8,8 @@ use App\Http\Requests\CadastroRequest;
 use App\Repositories\Contracts\RepositoriesContractsInterface;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\UpdateRequest;
 
 class UserController extends Controller
 {
@@ -20,9 +22,10 @@ class UserController extends Controller
 
     public function postUser(RepositoriesContractsInterface $model, CadastroRequest $request)
     {
-        $model->create($request->all());
+        $model->create([
+            'name' => $request->name, 'email' => $request->email, 'password' => Hash::make($request->password)]);
 
-        return redirect()->route('index')->with('sucess', 'Criado com sucesso !!');
+        return redirect()->route('index')->with(['status' => 'Criado com sucesso !!']);
     }
 
     public function deleteUser(RepositoriesContractsInterface $model, $id)
@@ -39,7 +42,7 @@ class UserController extends Controller
         return view('updateContent', compact('id'));
     }
 
-    public function updateUser(RepositoriesContractsInterface $model, Request $request, $id)
+    public function updateUser(RepositoriesContractsInterface $model, UpdateRequest $request, $id)
     {
         $model->update($id, $request->all());
 
@@ -51,7 +54,7 @@ class UserController extends Controller
         return view('login');
     }
 
-    public function authPage(RepositoriesContractsInterface $model,  LoginRequest $request)
+    public function authPage(LoginRequest $request)
     {
        $user = $request->validated();
         
@@ -61,12 +64,14 @@ class UserController extends Controller
             return redirect()->intended('/authContent');
         }
 
-        return redirect()->route('index');
+        return redirect()->route('loginPage')->withErrors([
+            'wrongPassword' => 'Senha ou Email incorretos'
+        ]);
     }
 
     public function authContent(RepositoriesContractsInterface $model)
     {
-        $user = Auth::user()->name;
+        $user = Auth::user();
         return view ('authContent', compact('user'));
     }
 

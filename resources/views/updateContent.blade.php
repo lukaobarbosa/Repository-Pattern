@@ -15,6 +15,17 @@
             </div>
             <button type="submit" class="btn btn-primary">Atualizar</button>
         </form>
+        @if($errors->any())
+            <div class="alert">
+                @foreach($errors->all() as $error)
+                    <ul>
+                        <li>
+                            {{$error}}
+                        </li>
+                    </ul>
+                @endforeach
+            </div>
+        @endif
     </div>
 </div>
 @endsection

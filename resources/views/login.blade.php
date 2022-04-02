@@ -1,6 +1,6 @@
 @extends('masterPage')
 @section('login')
-<div class="container-fluid">
+<div class="container-fluid" style="width: 330px; margin-top: 240px">
     <form action="{{route('authPage')}}" method="POST">
         @csrf
         <div class="mb-3 mt-3">
@@ -13,10 +13,11 @@
         </div>
 
         <button type="submit" class="btn btn-primary">Entrar</button>
+        <a class="btn btn-primary" href="{{route('index')}}">Voltar</a>
 
     </form>
     @if ($errors->any())
-    <div class="alert alert-danger">
+    <div class="alert">
         <ul>
             @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>

@@ -24,12 +24,17 @@
                 <a class="btn btn-primary" href="{{route('loginPage')}}">Entrar</a>
             </form>
             @if ($errors->any())
-            <div class="alert alert-danger mt-3">
+            <div class="alert  mt-3">
                 <ul>
                     @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
                     @endforeach
                 </ul>
+            </div>
+            @endif
+            @if (session('status'))
+            <div class="alert">
+                {{session('status')}}
             </div>
             @endif
         </div>
@@ -61,7 +66,6 @@
                             </form>
                         </td>
                     </tr>
-
                     @endforeach
                 </tbody>
             </table>
