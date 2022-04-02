@@ -1,3 +1,10 @@
+Estudo voltado para o entendimento de Repository Pattern, com ele criamos um camada de abstração entre o Model e o Controller alem de prover um 'contrato' para que os metodos dessa camada de abstração sigam algumas regras.
+
+O objetivo do estudo foi criar um CRUD com o Repository Pattern.
+
+Estudo também autenticação e middleware conceitos basicos para uma aplicação web segura.
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
