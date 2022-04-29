@@ -15,5 +15,11 @@ Repository-Pattern é um padrão de projeto que visa abstrair a camada de acesso
 * melhora na organização da aplicação 
 * implementação de testes separados por logica e regras de negocio
 
+### Sobre este estudo
+
+Neste estudo implementei um crud simples utilizando o padrão Repository-Pattern, um sistema de login onde o usuário se loga e é redirecionado para uma página exclusiva.
+
+* a título de estudo deixei uma tabela acessivel a todos sem validação apenas para mostrar alguns dados.
+
 
 
